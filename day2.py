@@ -21,3 +21,6 @@ elif abbrviation == "/":
     else:
         result = num_1 / num_2
         print(f"The result of {num_1} / {num_2} is: {result:.3f}")
+elif abbrviation == "**":
+    result = num_1 ** num_2
+    print(f"the ressult of {num_1} ** {num_2} is: {result:.3f}")
