@@ -1,3 +1,5 @@
+# A basic calculator which calculatess addition, subtraction, multiplication, division and power of two numbers.
+
 num_1 = float(input("Enter the first number: "))
 abbrviation = input("Enter operation (+, -, *, /, **): ")
 num_2 = float(input("Enter the second number: "))
