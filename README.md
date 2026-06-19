@@ -21,4 +21,6 @@ My daily Python and DSA learning journey.
 - Day 1: Variables and Data Types
 - Day 2: Calculator Project
 - Day 3: Conditions and Device Compatibility Checker
-
+- Day 4: Number Guessing Game 
+- Day 5: Time Countdown
+- Day6: Rock Paper Scissors Game 
