@@ -1,0 +1,93 @@
+# This is slot machine game where you can bet on lines and win based on matching symbols.
+
+
+import random
+
+
+ROWS = 3
+LINES = 3
+MIN_BET = 1
+MAX_BET = 100
+
+symbols = ["A", "B", "C", "D"]
+values = {"A": 5, "B": 4, "C": 3, "D": 2}
+
+# Function to ask user for a number within a specified range
+
+
+def ask_number(message, low, high):
+    while True:
+        try:
+            number = int(input(message))
+            if low <= number <= high:
+                return number
+            print(f"Enter a number from {low} to {high}.")
+        except ValueError:
+            print("Please enter a whole number.")
+
+
+def spin_slots():
+    slots = []
+
+    for _ in range(ROWS):
+        row = []
+        for _ in range(ROWS):
+            row.append(random.choice(symbols))
+        slots.append(row)
+
+    return slots
+
+
+def show_slots(slots):
+    for row in slots:
+        print(" | ".join(row))
+
+
+def get_winnings(slots, lines, bet):
+    total = 0
+
+    for line in range(lines):
+        row = slots[line]
+        if row[0] == row[1] == row[2]:
+            symbol = row[0]
+            total += values[symbol] * bet
+            print(f"Line {line + 1} won with {symbol}!")
+
+    return total
+
+
+def play_round(balance):
+    lines = ask_number(f"Lines to bet on (1-{LINES}): ", 1, LINES)
+    bet = ask_number(f"Bet per line (${MIN_BET}-${MAX_BET}): ", MIN_BET, MAX_BET)
+    cost = lines * bet
+
+    if cost > balance:
+        print(f"You only have ${balance}.")
+        return balance
+
+    slots = spin_slots()
+    show_slots(slots)
+
+    winnings = get_winnings(slots, lines, bet)
+    print(f"You won ${winnings}.")
+
+    return balance - cost + winnings
+
+
+def main():
+    print("Welcome to Slot Machine!")
+    balance = ask_number("Deposit money: $", 1, 10000)
+
+    while balance > 0:
+        print(f"\nBalance: ${balance}")
+        choice = input("Press Enter to play or q to quit: ").lower()
+
+        if choice == "q":
+            break
+
+        balance = play_round(balance)
+
+    print(f"Game over. You left with ${balance}.")
+
+
+main()
